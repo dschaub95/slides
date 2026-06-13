@@ -1,4 +1,7 @@
 {
+  "deploy": {
+    "enabled": true
+  },
   "decks": [
     {
       "id": "cells-are-agents-2026-06-15",

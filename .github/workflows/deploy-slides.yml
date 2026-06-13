@@ -1,6 +1,16 @@
 name: Deploy Slides
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "slides/**"
+      - "slides.deploy.json"
+      - "src/**"
+      - "favicon.svg"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/deploy-slides.yml"
   workflow_dispatch:
     inputs:
       decks:
@@ -20,17 +30,39 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      should_deploy: ${{ steps.gate.outputs.should_deploy }}
     steps:
       - uses: actions/checkout@v4
+      - id: gate
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+            echo "Manual deploy — bypassing deploy.enabled"
+            exit 0
+          fi
+
+          enabled=$(jq -r 'if .deploy.enabled == false then "false" else "true" end' slides.deploy.json)
+          if [ "$enabled" = "false" ]; then
+            echo "should_deploy=false" >> "$GITHUB_OUTPUT"
+            echo "::notice title=Deploy paused::Push deploys are off (deploy.enabled is false in slides.deploy.json). Re-enable the flag or run this workflow manually to redeploy."
+          else
+            echo "should_deploy=true" >> "$GITHUB_OUTPUT"
+          fi
       - uses: astral-sh/setup-uv@v5
-      - run: uv sync
-      - run: uv run build-pages --decks "${{ inputs.decks }}"
-      - uses: actions/upload-pages-artifact@v3
+        if: steps.gate.outputs.should_deploy == 'true'
+      - if: steps.gate.outputs.should_deploy == 'true'
+        run: uv sync
+      - if: steps.gate.outputs.should_deploy == 'true'
+        run: uv run build-pages --decks "${{ github.event_name == 'workflow_dispatch' && inputs.decks || 'all' }}"
+      - if: steps.gate.outputs.should_deploy == 'true'
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
   deploy:
     needs: build
+    if: needs.build.outputs.should_deploy == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
