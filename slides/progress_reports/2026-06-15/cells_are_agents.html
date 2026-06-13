@@ -1,0 +1,560 @@
+<!-- LTeX: enabled=false -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cells Are Agents</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --uke-blue: #004b93;
+        --uke-blue-deep: #003f7f;
+        --uke-sky: #dfeefb;
+        --uke-band: #e8ebf5;
+        --uke-ink: #111111;
+        --uke-muted: #4f5662;
+        --uke-rule: #b9c8dc;
+        --slide-w: 16in;
+        --slide-h: 9in;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        color: var(--uke-ink);
+        background: #eef1f6;
+        font-family: Aptos, Calibri, "Segoe UI", sans-serif;
+        line-height: 1.25;
+      }
+
+      main {
+        counter-reset: slide-page;
+        height: 100vh;
+        overflow-y: auto;
+        scroll-snap-type: y mandatory;
+      }
+
+      .slide {
+        position: relative;
+        display: grid;
+        min-height: 100vh;
+        overflow: hidden;
+        background: #ffffff;
+        border-bottom: 1px solid #d7dce5;
+        scroll-snap-align: start;
+      }
+
+      .uke-logo {
+        position: absolute;
+        z-index: 5;
+        top: 4vh;
+        left: 4.2vw;
+        width: 3.15vw;
+        min-width: 3.15rem;
+        height: auto;
+      }
+
+      .normal-slide {
+        counter-increment: slide-page;
+        grid-template-rows: auto 1fr;
+        padding: 17.5vh 4.2vw 5.2vh;
+      }
+
+      .normal-slide::after {
+        content: counter(slide-page, decimal-leading-zero);
+        position: absolute;
+        right: 4.2vw;
+        bottom: 4vh;
+        color: var(--uke-blue);
+        font-size: clamp(0.9rem, 1.05vw, 1.15rem);
+        font-weight: 600;
+      }
+
+      .normal-slide .top-rule {
+        position: absolute;
+        top: 12.7vh;
+        left: 0;
+        right: 0;
+        height: 0.45vh;
+        background: var(--uke-blue);
+      }
+
+      .normal-slide .slide-title {
+        align-self: start;
+        width: 100%;
+        min-height: 10.3vh;
+        margin: 0;
+        padding: 0.2vh 0 1vh;
+        color: var(--uke-blue);
+        font-size: clamp(2.15rem, 4.8vw, 3.95rem);
+        font-weight: 400;
+        line-height: 1.05;
+      }
+
+      .normal-slide .content {
+        width: min(100%, 72rem);
+        padding-top: 4.8vh;
+      }
+
+      .title-slide {
+        grid-template-rows: 48.5vh 34.5vh 1fr;
+      }
+
+      .title-slide .uke-logo {
+        top: 7vh;
+        left: 4.2vw;
+        width: 5vw;
+        min-width: 4.75rem;
+      }
+
+      .title-hero {
+        position: relative;
+        overflow: hidden;
+        background: url("uke/uke_header.jpg") center center / cover no-repeat;
+      }
+
+      .hero-rule {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1.15vh;
+        background: var(--uke-blue);
+      }
+
+      .title-band {
+        display: grid;
+        place-content: center start;
+        padding: 3vh 4.2vw 3.6vh;
+        background: var(--uke-band);
+      }
+
+      .title-slide h1 {
+        margin: 0;
+        padding: 0;
+        color: var(--uke-blue);
+        font-size: clamp(2.6rem, 5.2vw, 5rem);
+        font-weight: 400;
+        line-height: 1.05;
+        max-width: 100%;
+      }
+
+      .title-foot {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: end;
+        gap: 2rem;
+        padding: 2.2vh 3.25vw 4vh 4.2vw;
+      }
+
+      .title-note {
+        align-self: start;
+        width: min(45vw, 46rem);
+        margin: 0;
+        padding: 0;
+        color: var(--uke-blue);
+        font-size: clamp(1.15rem, 1.8vw, 1.95rem);
+      }
+
+      .uke-footer {
+        color: var(--uke-blue);
+        font-size: clamp(0.9rem, 1.1vw, 1.2rem);
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      p,
+      li {
+        max-width: 56rem;
+        font-size: clamp(1.35rem, 2.2vw, 2.25rem);
+      }
+
+      p {
+        margin: 0;
+        color: var(--uke-muted);
+      }
+
+      ul {
+        display: grid;
+        gap: 1.05rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      li {
+        padding-left: 1.2rem;
+        border-left: 0.28rem solid var(--uke-blue);
+      }
+
+      strong {
+        color: var(--uke-ink);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+
+      .tile {
+        min-height: 12rem;
+        padding: 1.1rem;
+        border: 1px solid var(--uke-rule);
+        background: #f8faff;
+      }
+
+      .tile b {
+        display: block;
+        color: var(--uke-blue);
+        font-size: clamp(0.9rem, 1.1vw, 1.15rem);
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .tile span {
+        display: block;
+        margin-top: 1.2rem;
+        font-size: clamp(1.15rem, 1.6vw, 1.6rem);
+      }
+
+      @media (max-width: 720px) {
+        .normal-slide {
+          padding: 8.6rem 1.2rem 3.4rem;
+        }
+
+        .normal-slide::after {
+          right: 1.2rem;
+          bottom: 1.35rem;
+        }
+
+        .normal-slide .top-rule {
+          top: 7.3rem;
+        }
+
+        .uke-logo {
+          top: 2rem;
+          left: 1.2rem;
+        }
+
+        .normal-slide .slide-title {
+          min-height: 4.6rem;
+          font-size: 2.15rem;
+        }
+
+        .title-slide {
+          grid-template-rows: 16.7rem 16.3rem 1fr;
+        }
+
+        .title-slide .uke-logo {
+          top: 2rem;
+          left: 1.2rem;
+        }
+
+        .title-band,
+        .title-foot {
+          padding-left: 1.2rem;
+          padding-right: 1.2rem;
+        }
+
+        .title-foot {
+          grid-template-columns: 1fr;
+          align-items: start;
+        }
+
+        .title-note {
+          width: 100%;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media print {
+        @page {
+          size: 16in 9in;
+          margin: 0;
+        }
+
+        * {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+
+        html,
+        body,
+        main {
+          width: auto;
+          height: auto;
+          overflow: visible;
+          background: #ffffff;
+        }
+
+        main {
+          display: block;
+          scroll-snap-type: none;
+        }
+
+        .slide {
+          width: var(--slide-w);
+          height: var(--slide-h);
+          min-height: 0;
+          border: 0;
+          page-break-after: always;
+          break-after: page;
+          scroll-snap-align: none;
+        }
+
+        .slide:last-child {
+          page-break-after: auto;
+          break-after: auto;
+        }
+
+        .uke-logo {
+          top: 0.36in;
+          left: 0.66in;
+          width: 0.5in;
+          min-width: 0;
+        }
+
+        .normal-slide {
+          padding: 1.55in 0.67in 0.45in;
+        }
+
+        .normal-slide::after {
+          right: 0.67in;
+          bottom: 0.34in;
+          font-size: 10pt;
+        }
+
+        .normal-slide .top-rule {
+          top: 1.14in;
+          height: 0.04in;
+        }
+
+        .normal-slide .slide-title {
+          min-height: 0.93in;
+          font-size: 34pt;
+        }
+
+        .normal-slide .content {
+          padding-top: 0.44in;
+        }
+
+        .title-slide {
+          grid-template-rows: 4.35in 3.1in 1fr;
+        }
+
+        .title-slide .uke-logo {
+          top: 0.61in;
+          left: 0.67in;
+          width: 0.82in;
+        }
+
+        .hero-rule {
+          height: 0.1in;
+        }
+
+        .title-band {
+          padding: 0.26in 0.67in 0.32in;
+        }
+
+        .title-slide h1 {
+          min-height: 1.2in;
+          font-size: 42pt;
+        }
+
+        .title-foot {
+          padding: 0.2in 0.54in 0.36in 0.67in;
+        }
+
+        .title-note {
+          width: 7.2in;
+          font-size: 19pt;
+        }
+
+        .uke-footer {
+          font-size: 11pt;
+        }
+
+        p,
+        li {
+          font-size: 24pt;
+        }
+
+        .tile span {
+          font-size: 18pt;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main aria-label="Cells Are Agents slide deck">
+      <section class="slide title-slide">
+        <img
+          class="uke-logo"
+          src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg"
+          alt="UKE Hamburg"
+        />
+        <div class="title-hero">
+          <div class="hero-rule"></div>
+        </div>
+        <div class="title-band">
+          <h1>
+            Cells are Agents: A Multi-Agent RL Approach for Learning Spatial Multicellular Dynamics
+          </h1>
+        </div>
+        <div class="title-foot">
+          <p class="title-note">Darius Schaub · <span data-current-date></span></p>
+          <div class="uke-footer">Universitätsklinikum Hamburg-Eppendorf</div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img
+          class="uke-logo"
+          src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg"
+          alt="UKE Hamburg"
+        />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Agency is a useful lens.</h2>
+        <div class="content">
+          <ul>
+            <li>Cells sense, decide, and act under uncertainty.</li>
+            <li>The useful abstraction is behavioral, not anthropomorphic.</li>
+            <li>Coordination emerges from local constraints and signals.</li>
+          </ul>
+          <p>Inline math: \( E = mc^2 \)</p>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img
+          class="uke-logo"
+          src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg"
+          alt="UKE Hamburg"
+        />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Minimal working model</h2>
+        <div class="content">
+          <div class="grid" aria-label="Agent model components">
+            <div class="tile">
+              <b>State</b>
+              <span>Internal context, memory, energy, and commitments.</span>
+            </div>
+            <div class="tile">
+              <b>Policy</b>
+              <span>Rules that map perceived conditions to action.</span>
+            </div>
+            <div class="tile">
+              <b>World</b>
+              <span>Neighbor cells, substrate, gradients, and feedback.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img
+          class="uke-logo"
+          src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg"
+          alt="UKE Hamburg"
+        />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">What this deck needs next</h2>
+        <div class="content">
+          <ul>
+            <li>Add the concrete biological examples.</li>
+            <li>Separate evidence from interpretation.</li>
+            <li>Close with the research question for the next interval.</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
+    ></script>
+    <script>
+      window.addEventListener("load", () => {
+        if (!window.renderMathInElement) return;
+        window.renderMathInElement(document.body, {
+          delimiters: [
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+        });
+      });
+
+      document.querySelector("[data-current-date]").textContent = new Intl.DateTimeFormat("en-US", {
+        month: "long",
+        day: "numeric",
+        year: "numeric",
+      }).format(new Date());
+
+      const slides = [...document.querySelectorAll(".slide")];
+
+      function currentSlideIndex() {
+        return slides.findIndex((slide) => {
+          const box = slide.getBoundingClientRect();
+          return Math.abs(box.top) < window.innerHeight / 2;
+        });
+      }
+
+      function showSlide(index, behavior = "smooth") {
+        const nextIndex = Math.max(0, Math.min(slides.length - 1, index));
+        slides[nextIndex].scrollIntoView({ behavior });
+        history.replaceState(null, "", `#slide-${nextIndex + 1}`);
+      }
+
+      function go(delta) {
+        showSlide(currentSlideIndex() + delta);
+      }
+
+      const hashSlide = Number.parseInt(window.location.hash.replace("#slide-", ""), 10);
+      if (Number.isInteger(hashSlide)) showSlide(hashSlide - 1, "auto");
+
+      window.addEventListener("keydown", (event) => {
+        if (["ArrowRight", "ArrowDown", "PageDown", " "].includes(event.key)) {
+          event.preventDefault();
+          go(1);
+        }
+        if (["ArrowLeft", "ArrowUp", "PageUp"].includes(event.key)) {
+          event.preventDefault();
+          go(-1);
+        }
+      });
+
+      document.querySelector("main").addEventListener(
+        "scroll",
+        () => {
+          window.clearTimeout(window.slideScrollTimer);
+          window.slideScrollTimer = window.setTimeout(() => {
+            const index = currentSlideIndex();
+            if (index >= 0) history.replaceState(null, "", `#slide-${index + 1}`);
+          }, 80);
+        },
+        { passive: true },
+      );
+    </script>
+  </body>
+</html>

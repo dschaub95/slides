@@ -1,0 +1,4 @@
+*.egg-info
+dist/
+slides/**/.references
+__pycache__
