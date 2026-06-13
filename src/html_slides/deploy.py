@@ -11,6 +11,7 @@ from typing import Any
 
 DEFAULT_MANIFEST = "slides.deploy.json"
 DEFAULT_DIST = "dist"
+SITE_ASSETS = ("favicon.svg",)
 EXCLUDED_NAMES = {
     ".DS_Store",
     ".git",
@@ -122,11 +123,16 @@ def select_decks(decks: list[Deck], selected: str) -> list[Deck]:
     return [by_id[deck_id] for deck_id in requested]
 
 
-def build_pages(decks: list[Deck], dist: Path) -> None:
+def build_pages(decks: list[Deck], dist: Path, repo_root: Path) -> None:
     if dist.exists():
         shutil.rmtree(dist)
     dist.mkdir(parents=True)
     (dist / ".nojekyll").write_text("", encoding="utf-8")
+
+    for name in SITE_ASSETS:
+        source = repo_root / name
+        if source.is_file():
+            shutil.copy2(source, dist / name)
 
     for deck in decks:
         build_deck(deck, dist / deck.id)
@@ -152,6 +158,12 @@ def build_deck(deck: Deck, destination: Path) -> None:
             )
         copied_entry.replace(index_path)
 
+    page = index_path.read_text(encoding="utf-8")
+    index_path.write_text(
+        page.replace('href="/favicon.', 'href="../favicon.'),
+        encoding="utf-8",
+    )
+
 
 def ignore_deploy_extras(directory: str, names: list[str]) -> set[str]:
     ignored = {name for name in names if name in EXCLUDED_NAMES}
@@ -171,6 +183,7 @@ def write_index(decks: list[Deck], index_path: Path) -> None:
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Slides</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <style>
       body {{
         font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -200,7 +213,7 @@ def main() -> None:
     dist = args.dist.resolve()
     decks = select_decks(load_decks(manifest_path), args.decks)
 
-    build_pages(decks, dist)
+    build_pages(decks, dist, manifest_path.parent)
     print(f"Built {len(decks)} deck(s) in {dist}")
     for deck in decks:
         print(f"- {deck.id}: {deck.title}")
