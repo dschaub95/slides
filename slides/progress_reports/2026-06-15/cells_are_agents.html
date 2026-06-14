@@ -20,6 +20,10 @@
         --uke-ink: #111111;
         --uke-muted: #4f5662;
         --uke-rule: #b9c8dc;
+        --teal: #197c72;
+        --coral: #c75d4d;
+        --gold: #a77b20;
+        --green: #5f8b3d;
         --slide-w: 16in;
         --slide-h: 9in;
       }
@@ -105,8 +109,8 @@
       }
 
       .normal-slide .content {
-        width: min(100%, 72rem);
-        padding-top: 4.8vh;
+        width: 100%;
+        padding-top: 4.2vh;
       }
 
       .title-slide {
@@ -178,8 +182,8 @@
 
       p,
       li {
-        max-width: 56rem;
-        font-size: clamp(1.35rem, 2.2vw, 2.25rem);
+        max-width: 60rem;
+        font-size: clamp(1.25rem, 1.85vw, 1.8rem);
       }
 
       p {
@@ -189,19 +193,66 @@
 
       ul {
         display: grid;
-        gap: 1.05rem;
+        gap: 0.85rem;
         margin: 0;
         padding: 0;
         list-style: none;
       }
 
       li {
-        padding-left: 1.2rem;
-        border-left: 0.28rem solid var(--uke-blue);
+        padding-left: 1.05rem;
+        border-left: 0.24rem solid var(--uke-blue);
       }
 
       strong {
         color: var(--uke-ink);
+      }
+
+      .small {
+        font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+      }
+
+      .caption {
+        margin-top: 0.55rem;
+        color: var(--uke-muted);
+        font-size: clamp(0.78rem, 1vw, 0.98rem);
+      }
+
+      .eyebrow {
+        color: var(--uke-blue);
+        font-size: clamp(0.85rem, 1vw, 1rem);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .objective-label {
+        margin-top: 1.25rem;
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 2.2rem;
+        align-items: center;
+      }
+
+      .two-col.top {
+        align-items: start;
+      }
+
+      .wide-left {
+        display: grid;
+        grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.72fr);
+        gap: 2.1rem;
+        align-items: center;
+      }
+
+      .wide-right {
+        display: grid;
+        grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+        gap: 2.1rem;
+        align-items: center;
       }
 
       .grid {
@@ -210,25 +261,239 @@
         gap: 1rem;
       }
 
-      .tile {
-        min-height: 12rem;
-        padding: 1.1rem;
+      .tile,
+      .panel {
+        min-height: 8rem;
+        padding: 1rem;
         border: 1px solid var(--uke-rule);
         background: #f8faff;
       }
 
-      .tile b {
+      .tile b,
+      .panel b {
         display: block;
         color: var(--uke-blue);
-        font-size: clamp(0.9rem, 1.1vw, 1.15rem);
+        font-size: clamp(0.82rem, 1vw, 1rem);
         font-weight: 700;
         text-transform: uppercase;
       }
 
-      .tile span {
+      .tile span,
+      .panel span {
         display: block;
-        margin-top: 1.2rem;
-        font-size: clamp(1.15rem, 1.6vw, 1.6rem);
+        margin-top: 0.85rem;
+        font-size: clamp(1.08rem, 1.45vw, 1.42rem);
+      }
+
+      .formula {
+        padding: 1rem 1.15rem;
+        border-left: 0.28rem solid var(--uke-blue);
+        background: #f6f8fc;
+        color: var(--uke-ink);
+        font-size: clamp(1rem, 1.5vw, 1.35rem);
+      }
+
+      .figure {
+        width: 100%;
+        max-height: 56vh;
+        object-fit: contain;
+        border: 1px solid var(--uke-rule);
+        background: #fff;
+      }
+
+      .full-figure {
+        width: 100%;
+        height: 58vh;
+        object-fit: contain;
+      }
+
+      .concept-img {
+        width: 100%;
+        max-height: 57vh;
+        object-fit: cover;
+        border: 1px solid var(--uke-rule);
+      }
+
+      .paper-figure {
+        width: 100%;
+        max-height: 58vh;
+        object-fit: contain;
+      }
+
+      .comm-figure {
+        width: 100%;
+        max-height: 49vh;
+        object-fit: contain;
+        display: block;
+      }
+
+      .comm-slide {
+        display: grid;
+        gap: 0;
+      }
+
+      .normal-slide .comm-slide {
+        padding-top: 2.4vh;
+      }
+
+      .video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+
+      video {
+        display: block;
+        width: 100%;
+        max-height: 49vh;
+        background: #f2f4f8;
+        border: 1px solid var(--uke-rule);
+      }
+
+      .video-grid video {
+        aspect-ratio: 1 / 1;
+        object-fit: contain;
+      }
+
+      .large-video {
+        max-height: 56vh;
+        aspect-ratio: 16 / 9;
+        object-fit: contain;
+      }
+
+      .svg-diagram {
+        width: 100%;
+        max-height: 58vh;
+        border: 1px solid var(--uke-rule);
+        background: #fbfcff;
+      }
+
+      .callout {
+        padding: 1rem 1.2rem;
+        background: #eef6fb;
+        border-left: 0.28rem solid var(--teal);
+      }
+
+      .callout p {
+        color: var(--uke-ink);
+      }
+
+      .normal-slide .comm-planned {
+        height: 3.05rem;
+        padding: 0.45rem 1.2rem;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        transform: translateY(-0.35rem);
+      }
+
+      .comm-planned p {
+        margin: 0;
+        line-height: 1.25;
+      }
+
+      .muted {
+        color: var(--uke-muted);
+      }
+
+      .obs-layout,
+      .action-layout,
+      .reward-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        gap: 2rem;
+        align-items: center;
+      }
+
+      .ppo-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
+        gap: 1.65rem;
+        align-items: center;
+        padding-top: 2.2vh !important;
+      }
+
+      .ppo-figure {
+        width: 100%;
+        max-height: 60vh;
+        object-fit: contain;
+        display: block;
+      }
+
+      .ppo-stack {
+        gap: 0.58rem;
+      }
+
+      .feature-stack {
+        display: grid;
+        gap: 0.72rem;
+      }
+
+      .feature-row {
+        display: grid;
+        grid-template-columns: 7.2rem minmax(0, 1fr);
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.72rem 0.85rem;
+        border-left: 0.24rem solid var(--uke-blue);
+        background: #f6f8fc;
+      }
+
+      .feature-row b {
+        color: var(--uke-blue);
+        font-size: clamp(0.82rem, 1vw, 0.95rem);
+        text-transform: uppercase;
+      }
+
+      .feature-row span {
+        color: var(--uke-ink);
+        font-size: clamp(1rem, 1.35vw, 1.28rem);
+      }
+
+      .obs-visual,
+      .action-visual,
+      .reward-visual {
+        width: 100%;
+        max-height: 56vh;
+        background: #fbfcff;
+      }
+
+      .feature-row .math-line,
+      .feature-row code {
+        display: block;
+        margin-top: 0.35rem;
+      }
+
+      .feature-row .math-line {
+        white-space: nowrap;
+      }
+
+      .feature-row .math-line .katex {
+        white-space: nowrap;
+        font-size: 1em;
+      }
+
+      .ppo-stack .feature-row {
+        grid-template-columns: 5.65rem minmax(0, 1fr);
+        padding: 0.58rem 0.75rem;
+      }
+
+      .ppo-stack .feature-row span {
+        font-size: clamp(0.86rem, 1vw, 1rem);
+      }
+
+      .ppo-stack .feature-row .math-line {
+        margin-top: 0;
+      }
+
+      .ppo-stack .feature-row .math-line .katex {
+        font-size: 0.9em;
+      }
+
+      .feature-row code {
+        color: var(--uke-blue-deep);
+        font-family: "Cascadia Code", Consolas, monospace;
+        font-size: clamp(0.9rem, 1.08vw, 1.02rem);
       }
 
       @media (max-width: 720px) {
@@ -279,7 +544,13 @@
           width: 100%;
         }
 
-        .grid {
+        .two-col,
+        .wide-left,
+        .wide-right,
+        .grid,
+        .video-grid,
+        .obs-layout,
+        .action-layout {
           grid-template-columns: 1fr;
         }
       }
@@ -352,7 +623,7 @@
         }
 
         .normal-slide .content {
-          padding-top: 0.44in;
+          padding-top: 0.38in;
         }
 
         .title-slide {
@@ -393,11 +664,17 @@
 
         p,
         li {
-          font-size: 24pt;
+          font-size: 19pt;
         }
 
-        .tile span {
-          font-size: 18pt;
+        .tile span,
+        .panel span {
+          font-size: 15pt;
+        }
+
+        .small,
+        .caption {
+          font-size: 9pt;
         }
       }
     </style>
@@ -416,7 +693,7 @@
         </div>
         <div class="title-band">
           <h1>
-            Cells are Agents: A Multi-Agent RL Approach for Learning Spatial Multicellular Dynamics
+            Cells are Agents: Multi-Agent RL for Spatial Multicellular Dynamics
           </h1>
         </div>
         <div class="title-foot">
@@ -426,75 +703,379 @@
       </section>
 
       <section class="slide normal-slide">
-        <img
-          class="uke-logo"
-          src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg"
-          alt="UKE Hamburg"
-        />
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
         <div class="top-rule"></div>
-        <h2 class="slide-title">Agency is a useful lens.</h2>
-        <div class="content">
-          <ul>
-            <li>Cells sense, decide, and act under uncertainty.</li>
-            <li>The useful abstraction is behavioral, not anthropomorphic.</li>
-            <li>Coordination emerges from local constraints and signals.</li>
-          </ul>
-          <p>Inline math: \( E = mc^2 \)</p>
+        <h2 class="slide-title">Why Tissue-Level Models?</h2>
+        <div class="content wide-right">
+          <div>
+            <ul>
+              <li><strong>Long-term goal:</strong> simulate the body at useful levels of coarseness.</li>
+              <li>Tissue organization is central to disease initiation, progression, and treatment response.</li>
+              <li>Single-cell foundation models miss spatial cell-cell interactions.</li>
+            </ul>
+          </div>
+          <img class="concept-img" src="figures/cells_as_agents_concept.png" alt="Scientific illustration of cells with local interaction neighborhoods" />
         </div>
       </section>
 
       <section class="slide normal-slide">
-        <img
-          class="uke-logo"
-          src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg"
-          alt="UKE Hamburg"
-        />
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
         <div class="top-rule"></div>
-        <h2 class="slide-title">Minimal working model</h2>
+        <h2 class="slide-title">Multi-Agent Reinforcement Learning</h2>
+        <div class="content two-col">
+          <img class="paper-figure" src="figures/marl_cells_labeled.png" alt="Labeled conceptual diagram of multi-agent reinforcement learning in tissue with decentralized rewards" />
+          <div>
+            <ul>
+              <li>Many agents act simultaneously in a shared environment.</li>
+              <li>Execution is decentralized: each cell receives local observations and its own reward.</li>
+              <li>Training learns shared policy parameters that maximize expected return.</li>
+            </ul>
+            <p class="eyebrow objective-label">Objective</p>
+            <p class="formula">\( \theta^\star = \arg\max_\theta \; \mathbb{E}_{\pi_\theta}\left[\sum_{t=0}^{T}\gamma^t \sum_{i=1}^{N} r_i^t \right] \)</p>
+            <p class="caption">Learn one policy that produces local actions from local observations while optimizing the decentralized rewards collected by all agents.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Tissue Reassembly Task</h2>
+        <div class="content wide-left">
+          <img class="paper-figure" src="figures/tissue_reassembly_task.png" alt="Publication-quality diagram of the tissue reassembly task with local observations and target tissue graph" />
+          <div>
+            <ul>
+              <li>Input: target coordinates define a top-\(k\) neighbor graph.</li>
+              <li>Agents begin from non-target initial coordinates.</li>
+              <li>Objective: recover the original spatial organization of the tissue.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Model Architecture</h2>
+        <div class="content wide-left">
+          <img class="paper-figure" src="figures/model_architecture_interval_v1_synthetic.png" alt="Publication-quality CellAgent model architecture diagram for interval_v1 synthetic configuration" />
+          <div>
+            <ul>
+              <li>Config uses a <strong>concat encoder</strong>: neighbor features, ID features, and self features are flattened into one MLP.</li>
+              <li>Cell communication: each cell emits a 32-d message and receives the mean transformed neighbor message.</li>
+              <li>The fused representation enters a 256-unit LSTM, followed by action, value, and next-message heads.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Related Work: CellTrip</h2>
         <div class="content">
-          <div class="grid" aria-label="Agent model components">
-            <div class="tile">
-              <b>State</b>
-              <span>Internal context, memory, energy, and commitments.</span>
+          <img class="full-figure" src="figures/celltrip_fig1.png" alt="CellTrip overview figure" />
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Related Work: LUNA</h2>
+        <div class="content">
+          <img class="full-figure" src="figures/Luna_fig1.png" alt="LUNA overview figure" />
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Observation Space</h2>
+        <div class="content obs-layout">
+          <svg class="obs-visual" viewBox="0 0 720 440" role="img" aria-label="Local cell observation schematic">
+            <defs>
+              <marker id="obs-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#004b93" />
+              </marker>
+            </defs>
+            <circle cx="270" cy="218" r="150" fill="#004b9312" stroke="#004b93" stroke-width="4" stroke-dasharray="9 8" />
+            <g fill="#dfeefb" stroke="#004b93" stroke-width="3">
+              <circle cx="270" cy="218" r="24" />
+            </g>
+            <text x="270" y="226" text-anchor="middle" font-size="18" fill="#003f7f">i</text>
+            <g fill="#f3d7d2" stroke="#c75d4d" stroke-width="3">
+              <circle cx="168" cy="158" r="19" /><circle cx="222" cy="106" r="18" />
+              <circle cx="344" cy="112" r="20" /><circle cx="394" cy="196" r="18" />
+              <circle cx="346" cy="302" r="19" /><circle cx="238" cy="334" r="17" />
+              <circle cx="148" cy="260" r="18" /><circle cx="286" cy="150" r="15" />
+            </g>
+            <g stroke="#004b93" stroke-width="3" marker-end="url(#obs-arrow)">
+              <line x1="249.3" y1="205.8" x2="184.4" y2="167.6" />
+              <line x1="260.5" y1="195.9" x2="229.1" y2="122.5" />
+              <line x1="283.7" y1="198.3" x2="332.6" y2="128.4" />
+              <line x1="293.6" y1="213.8" x2="376.3" y2="199.1" />
+              <line x1="286.1" y1="235.8" x2="333.3" y2="287.9" />
+              <line x1="263.6" y1="241.1" x2="242.5" y2="317.6" />
+              <line x1="247.3" y1="225.8" x2="165.0" y2="254.1" />
+              <line x1="275.5" y1="194.6" x2="282.6" y2="164.6" />
+            </g>
+            <rect x="470" y="98" width="200" height="236" rx="8" fill="#f8faff" stroke="#b9c8dc" stroke-width="2" />
+            <text x="570" y="135" text-anchor="middle" font-size="22" fill="#004b93">concat input</text>
+            <text x="570" y="174" text-anchor="middle" font-size="18" fill="#111">8 neighbor slots</text>
+            <text x="570" y="210" text-anchor="middle" font-size="18" fill="#111">relative position</text>
+            <text x="570" y="242" text-anchor="middle" font-size="18" fill="#111">heading + speed</text>
+            <text x="570" y="274" text-anchor="middle" font-size="18" fill="#111">mutual bit + ID</text>
+            <text x="570" y="306" text-anchor="middle" font-size="18" fill="#111">self channels</text>
+            <path d="M 420 218 L 460 218" stroke="#004b93" stroke-width="4" marker-end="url(#obs-arrow)" />
+          </svg>
+          <div class="feature-stack">
+            <div class="feature-row">
+              <b>Neighbors</b>
+              <span>Radius top-\(k\), \(k=8\), padded if fewer cells are visible.</span>
             </div>
-            <div class="tile">
-              <b>Policy</b>
-              <span>Rules that map perceived conditions to action.</span>
+            <div class="feature-row">
+              <b>Per slot</b>
+              <span>\(\Delta x,\Delta y\), neighbor heading, neighbor speed, mutual-observation bit, neighbor ID.</span>
             </div>
-            <div class="tile">
-              <b>World</b>
-              <span>Neighbor cells, substrate, gradients, and feedback.</span>
+            <div class="feature-row">
+              <b>Self</b>
+              <span>Self ID, perceived-neighbor ratio, heading, speed, previous-step position delta.</span>
+            </div>
+            <div class="feature-row">
+              <b>Encoding</b>
+              <span>The configured model flattens all fields into one concat encoder.</span>
             </div>
           </div>
         </div>
       </section>
 
       <section class="slide normal-slide">
-        <img
-          class="uke-logo"
-          src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg"
-          alt="UKE Hamburg"
-        />
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
         <div class="top-rule"></div>
-        <h2 class="slide-title">What this deck needs next</h2>
+        <h2 class="slide-title">Action Space</h2>
+        <div class="content action-layout">
+          <svg class="action-visual" viewBox="0 0 720 440" role="img" aria-label="Cell action space schematic">
+            <defs>
+              <marker id="act-arrow" viewBox="0 0 10 10" refX="7.6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="context-stroke" />
+              </marker>
+            </defs>
+            <rect x="36" y="80" width="314" height="280" rx="10" fill="#fbfcff" stroke="#d4deeb" stroke-width="2" />
+            <text x="193" y="118" text-anchor="middle" font-size="22" fill="#004b93">movement command</text>
+            <circle cx="178" cy="230" r="40" fill="#dfeefb" stroke="#004b93" stroke-width="4" />
+            <text x="178" y="237" text-anchor="middle" font-size="19" fill="#003f7f">i</text>
+            <path d="M 222.0 230.0 L 292 230" stroke="#004b93" stroke-width="4" marker-end="url(#act-arrow)" />
+            <path d="M 219.3 214.9 L 282 192" stroke="#197c72" stroke-width="3" marker-end="url(#act-arrow)" />
+            <path d="M 219.3 245.1 L 282 268" stroke="#197c72" stroke-width="3" marker-end="url(#act-arrow)" />
+            <path d="M 209.9 199.7 L 259 153" stroke="#c75d4d" stroke-width="3" marker-end="url(#act-arrow)" />
+            <path d="M 209.9 260.3 L 259 307" stroke="#c75d4d" stroke-width="3" marker-end="url(#act-arrow)" />
+            <text x="302" y="236" font-size="18" fill="#004b93">0°</text>
+            <text x="288" y="186" font-size="18" fill="#197c72">-5°</text>
+            <text x="288" y="278" font-size="18" fill="#197c72">+5°</text>
+            <text x="250" y="146" font-size="18" fill="#c75d4d">-20°</text>
+            <text x="250" y="320" font-size="18" fill="#c75d4d">+20°</text>
+            <text x="193" y="344" text-anchor="middle" font-size="19" fill="#4f5662">speed changes along heading</text>
+
+            <rect x="430" y="84" width="226" height="74" rx="8" fill="#f8faff" stroke="#004b93" stroke-width="3" />
+            <text x="543" y="116" text-anchor="middle" font-size="21" fill="#004b93">heading head</text>
+            <text x="543" y="142" text-anchor="middle" font-size="17" fill="#4f5662">9 logits</text>
+            <rect x="430" y="196" width="226" height="74" rx="8" fill="#f8faff" stroke="#197c72" stroke-width="3" />
+            <text x="543" y="228" text-anchor="middle" font-size="21" fill="#197c72">speed head</text>
+            <text x="543" y="254" text-anchor="middle" font-size="17" fill="#4f5662">6 logits</text>
+            <rect x="430" y="308" width="226" height="54" rx="8" fill="#fff8eb" stroke="#a77b20" stroke-width="3" />
+            <text x="543" y="342" text-anchor="middle" font-size="20" fill="#a77b20">no receiver action</text>
+          </svg>
+          <div class="feature-stack">
+            <div class="feature-row">
+              <b>Action layout</b>
+              <span><code>MultiDiscrete([9, 6])</code></span>
+            </div>
+            <div class="feature-row">
+              <b>Heading</b>
+              <span>9 relative turns <span class="math-line">\(-20^\circ, -15^\circ, \ldots, +20^\circ\)</span></span>
+            </div>
+            <div class="feature-row">
+              <b>Speed</b>
+              <span>Five speed deltas plus stop <span class="math-line">\(\Delta v \in \{-2, -1, 0, +1, +2\}\)</span></span>
+            </div>
+            <div class="feature-row">
+              <b>Communication</b>
+              <span>Messages enabled; receiver actions disabled.<code>comm_select_action = false</code></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Reward Signal</h2>
+        <div class="content reward-layout">
+          <img class="reward-visual" src="figures/reward_signal_bins.png" alt="Generated visual explanation of interval reward bins and target visibility rewards" />
+          <div class="feature-stack">
+            <div class="feature-row">
+              <b>Reward</b>
+              <span><span class="math-line">\(r_i^t = 0.6\,\Delta M_i^t + 0.4\,\Delta B_i^t\)</span></span>
+            </div>
+            <div class="feature-row">
+              <b>Visibility</b>
+              <span>\(\Delta M_i^t\) rewards target neighbors entering the local top-\(k\) view and penalizes disappearance.</span>
+            </div>
+            <div class="feature-row">
+              <b>Distance</b>
+              <span>\(\Delta B_i^t = B_i^{t-1} - B_i^t\): lower distance-error bin is positive.</span>
+            </div>
+            <div class="feature-row">
+              <b>Bins</b>
+              <span>Bin 0 is a tolerance band; later bins have width \(1.5 \cdot v_{max}\).</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">PPO Training</h2>
+        <div class="content ppo-layout">
+          <img
+            class="ppo-figure"
+            src="figures/ppo_training_pufferlib.png"
+            alt="Publication-style schematic of PufferLib PPO training with vectorized tissue copies, rollout buffers, advantage estimates, grouped recurrent minibatches, and clipped PPO updates"
+          />
+          <div class="feature-stack ppo-stack">
+            <div class="feature-row">
+              <b>Collect</b>
+              <span>PufferLib first steps many vectorized tissue copies and stores trajectories for all cells.</span>
+            </div>
+            <div class="feature-row">
+              <b>Estimate</b>
+              <span>Per-agent rewards are converted into return and advantage estimates against the value baseline.</span>
+            </div>
+            <div class="feature-row">
+              <b>Objective</b>
+              <span><span class="math-line">\(J = J_{\mathrm{clip}} - c_{v} L_{v} + c_{h} H(\pi_\theta)\)</span></span>
+            </div>
+            <div class="feature-row">
+              <b>Shift</b>
+              <span>Actions with positive advantage become more likely; negative-advantage actions become less likely, with clipping limiting each shift.</span>
+            </div>
+            <div class="feature-row">
+              <b>Update</b>
+              <span>Sample recurrent minibatches, keep communication groups intact, and take clipped gradient steps.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Vector Communication</h2>
+        <div class="content comm-slide">
+          <img
+            class="comm-figure"
+            src="figures/vector_communication.png"
+            alt="Publication-style schematic of local 32-dimensional vector communication, mean aggregation, recurrent policy input fusion, action output, and next message output"
+          />
+          <div class="callout comm-planned">
+            <p>Planned: generic message channels, and attention over visible neighbors and messages.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Synthetic Experiment</h2>
+        <div class="content wide-right">
+          <div>
+            <ul>
+              <li>Target: reconstruct square grid patterns from random coordinates.</li>
+              <li>Initial setup: \(8 \times 8\) baseline with coordinate-based identity features.</li>
+              <li>Stress tests: altered starts and larger agent counts without changing the task definition.</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <b>Training signal</b>
+            <span>Agents learn local movements that reduce top-\(k\) target-distance error, not a global image loss.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Synthetic Rollouts: 8 x 8</h2>
+        <div class="content">
+          <div class="video-grid">
+            <figure>
+              <video src="videos/synthetic/rollout_eval_square_8x8_default.mp4" controls muted loop preload="metadata"></video>
+              <figcaption class="caption">Default initialization</figcaption>
+            </figure>
+            <figure>
+              <video src="videos/synthetic/rollout_eval_square_8x8_cluster.mp4" controls muted loop preload="metadata"></video>
+              <figcaption class="caption">Clustered initialization</figcaption>
+            </figure>
+            <figure>
+              <video src="videos/synthetic/rollout_eval_square_8x8_uniform.mp4" controls muted loop preload="metadata"></video>
+              <figcaption class="caption">Uniform initialization</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Synthetic Rollouts: Scaling</h2>
+        <div class="content two-col">
+          <figure>
+            <video class="large-video" src="videos/synthetic/rollout_eval_square_10x10.mp4" controls muted loop preload="metadata"></video>
+            <figcaption class="caption">10 x 10 target grid</figcaption>
+          </figure>
+          <figure>
+            <video class="large-video" src="videos/synthetic/rollout_eval_square_16x16.mp4" controls muted loop preload="metadata"></video>
+            <figcaption class="caption">16 x 16 target grid</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Real Data: First Small Case</h2>
+        <div class="content two-col top">
+          <div>
+            <ul>
+              <li>Dataset slice: one quarter of a kidney glomerulus.</li>
+              <li>Current scale: 20 cells total.</li>
+              <li>Purpose: test whether the same local objective transfers beyond synthetic grids.</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <p><strong>Media status:</strong> the requested best-performing real-data rollout is not present in the current slide folder. Add it under `videos/real/` and this slide can be wired to the file directly.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide normal-slide">
+        <img class="uke-logo" src="uke/universitatsklinikum-hamburg-eppendorf-seeklogo.svg" alt="UKE Hamburg" />
+        <div class="top-rule"></div>
+        <h2 class="slide-title">Outlook</h2>
         <div class="content">
           <ul>
-            <li>Add the concrete biological examples.</li>
-            <li>Separate evidence from interpretation.</li>
-            <li>Close with the research question for the next interval.</li>
+            <li>Discuss methodological overlap and benchmarks with the CellTrip first author.</li>
+            <li>Replace coordinate identity with cell type-based encoding and local reward design.</li>
+            <li>Run extensive sweeps over reward weights, communication, aggregation, and PPO settings.</li>
+            <li>Move from reconstruction toy tasks toward disease-relevant tissue dynamics.</li>
           </ul>
         </div>
       </section>
     </main>
 
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"
-    ></script>
-    <script
-      defer
-      src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"
-    ></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
     <script>
       window.addEventListener("load", () => {
         if (!window.renderMathInElement) return;
